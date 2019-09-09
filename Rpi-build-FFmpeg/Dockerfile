@@ -1,5 +1,5 @@
 FROM debian
-MAINTAINER Signal Flag Z
+LABEL maintainer "Signal Flag Z"
 
 RUN echo "now building..." \
   && echo "updating..." \
