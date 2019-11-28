@@ -15,6 +15,6 @@ RUN echo "now building..." \
 COPY ./buildFF.sh  /home
 
 # ALSA Version
-ENV V_ALSA="1.1.9"
+ENV V_ALSA="1.2.1.1"
 
 CMD ["/bin/bash", "-c",  "/home/buildFF.sh"]
