@@ -7,12 +7,14 @@
 apt update
 apt -y upgrade
 
+mkdir -p /home/ffmpeg_sources /home/bin
+
 echo "building x264."
 cd /home
 git clone git://git.videolan.org/x264.git
 cd /home/x264
-./configure --enable-static --enable-shared
-make -j4
+PATH="/home/bin:$PATH" PKG_CONFIG_PATH="/home/ffmpeg_build/lib/pkgconfig" ./configure --prefix="/home/ffmpeg_build"  --enable-static 
+PATH="/home/bin:$PATH" make -j4
 make install
 ldconfig
 
@@ -28,14 +30,32 @@ git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg --depth 1
 wget ftp://ftp.alsa-project.org/pub/lib/alsa-lib-$V_ALSA.tar.bz2
 tar xjvf alsa-lib-$V_ALSA.tar.bz2
 cd /home/alsa-lib-$V_ALSA
-./configure --prefix=/home/ffmpeg
-make -j4
+PATH="/home/bin:$PATH" PKG_CONFIG_PATH="/home/ffmpeg_build/lib/pkgconfig" ./configure --prefix="/home/ffmpeg_build"
+PATH="/home/bin:$PATH" make -j4
 make install
 
 export LD_LIBRARY_PATH="/opt/vc/lib"
 cd /home/ffmpeg
 echo "building FFmpeg."
-./configure --enable-gpl --enable-nonfree --enable-libx264 --enable-mmal --enable-omx-rpi --enable-omx --enable-libfreetype --enable-libfontconfig --enable-libfribidi --extra-cflags="-I/home/ffmpeg/include" --extra-ldflags="-L/home/ffmpeg/lib" --extra-libs="-ldl"
-make -j4
+PATH="/home/bin:$PATH" PKG_CONFIG_PATH="/home/ffmpeg_build/lib/pkgconfig" \
+  ./configure \
+    --prefix="/home/ffmpeg_build"
+    --pkg-config-flags="--static" \
+    --enable-static \
+    --enable-gpl \
+    --enable-nonfree \
+    --enable-libx264 \
+    --enable-mmal \
+    --enable-omx-rpi \
+    --enable-omx \
+    --enable-libfreetype \
+    --enable-libfontconfig \
+    --enable-libfribidi \
+    --extra-cflags="-I/home/ffmpeg_build/include" \
+    --extra-ldflags="-L/home/ffmpeg_build/lib" \
+    --extra-libs="-ldl" \
+    --disable-doc \
+    --disable-debug 
+PATH="/home/bin:$PATH" make -j4
 
 echo "done."
