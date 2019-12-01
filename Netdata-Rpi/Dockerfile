@@ -1,4 +1,3 @@
-Dockerfile
 FROM netdata/netdata
 LABEL maintainer "Signal Flag Z"
 
