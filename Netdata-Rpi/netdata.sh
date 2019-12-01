@@ -11,5 +11,4 @@ docker run -d --name=rpinetdata   -p 19999:19999 \
   --security-opt apparmor=unconfined \
   rpinetdata
   
-  echo 'open URL http://your-Pi-IP:19999/Rpi.html
-  
+  echo 'open URL http://your-Pi-IP:19999/Rpi.html'  
