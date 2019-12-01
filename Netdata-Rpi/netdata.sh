@@ -1,5 +1,5 @@
 #!/bin/bash
-# FFmpeg build script
+# Netdata for Rpi script
 # Signal Flag Z
 
 docker build -t rpinetdata .
