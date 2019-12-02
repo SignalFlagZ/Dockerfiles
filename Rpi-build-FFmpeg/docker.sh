@@ -11,7 +11,7 @@ if [ "$(docker ps -aq -f status=exited -f name=$dname)" ]; then
 echo Container ${dname} exist. Remove it.
   docker rm ${dname}
 fi
-docker run -it --name ${dname} ${dname}
+docker run -it --rm --name ${dname} ${dname}
 # To change ALSA version.
 # docker run -it --env V_ALSA=1.1.9 --name ${dname} ${dname}
 docker cp buildff:/root/bin/ffmpeg ./
