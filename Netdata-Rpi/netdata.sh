@@ -22,5 +22,5 @@ docker run -d --name=${dname} -p 19999:19999 \
   --security-opt apparmor=unconfined \
   ${dname}
   
-  echo 'Open URL http://your-Pi-IP:19999/Rpi.html'
+  echo 'Open URL http://your-Pi-IP:19999/rpi.html'
   echo Docker image and container name is ${dname}.
