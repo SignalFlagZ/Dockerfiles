@@ -14,7 +14,7 @@ echo Container ${dname} exist. Remove it.
   docker rm ${dname}
 fi
 
-docker run -d --name=${dname} -p 19999:19999 \
+docker run -d --restart=unless-stopped --name=${dname} -p 19999:19999 \
   -v /proc:/host/proc:ro \
   -v /sys:/host/sys:ro \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
