@@ -1,4 +1,4 @@
-FROM netdata/netdata
+FROM netdata/netdata:v1.19.0
 LABEL maintainer "Signal Flag Z"
 
 RUN sed -i -e 's/^# sensors=force/sensors=force/' /usr/lib/netdata/conf.d/charts.d.conf
