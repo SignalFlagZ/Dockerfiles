@@ -11,7 +11,8 @@ do
       p ) FLG_PULL="TRUE";;
       * ) echo "Usage: $CMD [-b] [-h]"
           echo "-h : help"
-          echo "-p : Pull latest image";;
+          echo "-p : Pull latest image"
+          exit 1 ;;
   esac
 done
 
