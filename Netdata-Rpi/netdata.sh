@@ -5,7 +5,7 @@
 CMD=`basename $0`
 dname=rpinetdata
 
-while getopts p OPT
+while getopts :p OPT
 do
   case $OPT in
       p ) FLG_PULL="TRUE";;
