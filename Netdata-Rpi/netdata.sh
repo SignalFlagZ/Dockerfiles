@@ -2,8 +2,24 @@
 # Netdata for RPi build script
 # Signal Flag Z
 
+CMD=`basename $0`
 dname=rpinetdata
-docker build -t ${dname} .
+
+while getopts p OPT
+do
+  case $OPT in
+      p ) FLG_PULL="TRUE";;
+      * ) echo "Usage: $CMD [-b] [-h]"
+          echo "-h : help"
+          echo "-p : Pull latest image";;
+  esac
+done
+
+if [ "$FLG_PULL" = "TRUE" ]; then
+  docker build --pull --tag ${dname} .
+else
+  docker build --tag ${dname} .
+fi
 
 if [ "$(docker ps -q -f name=${dname})" ]; then
 echo Container ${dname} is running. Stops it.
