@@ -9,7 +9,7 @@ while getopts :p OPT
 do
   case $OPT in
       p ) FLG_PULL="TRUE";;
-      * ) echo "Usage: $CMD [-b] [-h]"
+      * ) echo "Usage: $CMD [-p] [-h]"
           echo "-h : help"
           echo "-p : Pull latest image"
           exit 1 ;;
