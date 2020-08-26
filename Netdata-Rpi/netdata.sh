@@ -16,19 +16,23 @@ do
   esac
 done
 
-if [ "$FLG_PULL" = "TRUE" ]; then
-  docker build --pull --tag ${dname} .
-else
-  docker build --tag ${dname} .
-fi
-
 if [ "$(docker ps -q -f name=${dname})" ]; then
-echo Container ${dname} is running. Stops it.
+echo Stop container ${dname}.
   docker stop ${dname}
 fi
 if [ "$(docker ps -aq -f status=exited -f name=$dname)" ]; then
-echo Container ${dname} exist. Remove it.
+echo Remove container ${dname}.
   docker rm ${dname}
+fi
+
+if [ "$FLG_PULL" = "TRUE" ]; then
+  if [ "$(docker images -q -f before=rpinetdata)" ]; then
+    echo Delete image ${dname}.
+    docker rmi ${dname}
+  fi
+  docker build --pull --tag ${dname} .
+else
+  docker build --tag ${dname} .
 fi
 
 docker run -d --restart=unless-stopped --name=${dname} -p 19999:19999 \
